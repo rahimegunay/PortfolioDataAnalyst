@@ -40,6 +40,20 @@ group by population, location
 order by PercentInfectedPopulation desc
 --showing countries with highest death count  per population
 
+select Location, population,date, MAX(total_cases) as HighestInfectionCount,  Max((total_cases/population))*100 as PercentInfectedPopulation
+from PortfolioProject..CovidDeaths
+--where location='Turkey'
+group by population, location, date
+order by PercentInfectedPopulation desc
+
+
+select location, SUM(cast(new_deaths as int)) as TotalDeathCount
+from PortfolioProject..CovidDeaths
+Where continent is null 
+and location not in ('World', 'European Union', 'International')
+group by location
+order by TotalDeathCount desc
+
 
 --Lets break thisgs down by continent
 
